@@ -49,8 +49,9 @@ const filterByQuery = (query, animalsArray) => {
     return filteredResults;
 };
 
+const PORT = process.env.PORT || 3001;
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
     console.log(`
 
 
@@ -64,5 +65,5 @@ app.listen(3001, () => {
        |||  |||\`-'._.--._.-'
                   |||  |||  
 
- API server started at port 3001!`)
+ API server started at port ${PORT}!`)
 });
