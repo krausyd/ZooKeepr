@@ -12,6 +12,21 @@ app.get('/api/animals', (req, res) => {
     res.json(results);
 });
 
+app.get('/api/animals/:id', (req, res) => {
+    console.log('GET /api/animals id:', req.params.id, req.query);
+    const result = findById(req.params.id, animals);
+    if (result) {
+        res.json(result);
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+const findById = (id, animalsArray) => {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+};
+
 const filterByQuery = (query, animalsArray) => {
     let filteredResults = animalsArray;
     let personalityTraitsArray = [];
