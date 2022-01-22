@@ -11,6 +11,23 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 
+//serve static content (images, css, js, ...)
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/animals', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeepers', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+
+//api routes
 app.get('/api/animals', (req, res) => {
     let results = animals;
     console.log('GET /api/animals', req.query);
@@ -110,6 +127,12 @@ const filterByQuery = (query, animalsArray) => {
     }
     return filteredResults;
 };
+
+
+//Wildcard route
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 const PORT = process.env.PORT || 3001;
 
